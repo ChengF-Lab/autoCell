@@ -27,7 +27,7 @@ There were 2000 highest variance genes selected in the Zeisel dataset.
 ```
 git clone https://github.com/ChengF-Lab/autoCell.git
 cd autoCell
-python demo.py --help
+python debug_main.py --help
 ```
 
 ## Demo
