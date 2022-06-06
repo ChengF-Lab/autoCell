@@ -563,10 +563,10 @@ class VADE2(VADE):
         return info
 
 
-class scGGN(VADE):
+class autoCell(VADE):
     def __init__(self, hparams, in_dim, latent_dim, hidden_dims=tuple(),
                  n_centroid=1, neighbor_num=10, **kwargs):
-        super(scGGN, self).__init__(hparams, in_dim, latent_dim, hidden_dims, n_centroid=n_centroid, **kwargs)
+        super(autoCell, self).__init__(hparams, in_dim, latent_dim, hidden_dims, n_centroid=n_centroid, **kwargs)
         self.dgg_sampler = DGGSampler(latent_dim=latent_dim, n_centroid=n_centroid, neighbor_num=neighbor_num)
         self.max_stage_num = 3
         self.lr = self.hparams.lr
@@ -588,7 +588,7 @@ class scGGN(VADE):
         return self.dgg_sampler.get_gamma(feature, update_pi=False)
 
     def on_train_start(self):
-        super(scGGN, self).on_train_start()
+        super(autoCell, self).on_train_start()
         if self.training_stage == 2:
             self.kl_divergence_fn = self.dgg_sampler.kl_divergence
             self.dgg_sampler._pi = self.gmm_sampler._pi
@@ -599,7 +599,7 @@ class scGGN(VADE):
 
     @enabled_only
     def training_epoch_end(self, outputs):
-        super(scGGN, self).training_epoch_end(outputs)
+        super(autoCell, self).training_epoch_end(outputs)
         if self.training_stage==2:
             sim = torch.cat([batch["sim"] for batch in outputs[:-1]]).cpu()
             writer = self.logger.experiment

@@ -88,11 +88,9 @@ class SingleCellDatasetDRA():
     def add_argparse_args(parent_parser):
         parser = parent_parser.add_argument_group("dataset")
         parser.add_argument('--name', type=str, default="10x_73k",
-                            choices=["10x_68k", "10x_73k", "Macosko", "Zeisel", "data1", "yan",
-                                     "GSE138852", "kolo", "kolo1", "romov", "sim", "sim05", "sim25","dataA2", "dataF2", "Klein",
-                                     "GSE75748_sc_time_course_ec", "GSE75748_sc_cell_type_ec", "petro",
-                                     "GSE75748_sc_time_course_ec_full", "GSE75748_sc_cell_type_ec_full",
-                                     "oligo", "mg", "astro"])
+                            choices=["10x_68k", "10x_73k", "Zeisel",
+                                     "GSE138852", "kolo", "romov", "sim05", "sim25", "Klein",
+                                     "petro"])
         parser.add_argument('--root_dir', type=str, default=".")
         parser.add_argument('--preprocess', type=str, default="scvi", choices=["scvi", "dca"])
         parser.add_argument("--split_rate", type=float, default=0.9)
@@ -102,10 +100,9 @@ class SingleCellDatasetDRA():
         return parent_parser
 
     def load_data(self, root_dir, name, transpose=False):
-        mtx_files = ["10x_68k", "10x_73k", "Macosko", "Zeisel"]
-        txt_files = ["data1", "yan", "GSE138852", "kolo", "kolo1", "romov", "sim", "sim05", "sim25", "dataA2", "dataF2", "Klein",
-                     "GSE75748_sc_time_course_ec", "GSE75748_sc_cell_type_ec", "petro",
-                     "GSE75748_sc_time_course_ec_full", "GSE75748_sc_cell_type_ec_full"]
+        mtx_files = ["10x_68k", "10x_73k", "Zeisel"]
+        txt_files = [ "GSE138852", "kolo", "romov", "sim05", "sim25", "Klein",
+                     ]
         print(f"Loading data '{name}' from {os.path.join(root_dir, name)} ...")
         t0 = time.time()
         if name in mtx_files:

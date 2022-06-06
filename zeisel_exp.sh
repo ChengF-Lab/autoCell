@@ -1,5 +1,5 @@
-#!/bin/bash
-model="scGGN"
+autoCell#!/bin/bash
+model="autoCell"
 comment="exp_eval"
 hidden_dims="128 128"
 latent_dim=10

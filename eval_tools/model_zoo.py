@@ -309,7 +309,7 @@ class EvalProtocol():
 
 
 try:
-    from models.model import scGGN
+    from models.model import autoCell
     import pytorch_lightning as pl
     import torch
     from models.utils import get_loader, Message
@@ -351,7 +351,7 @@ class ModelEvaluator(EvalProtocol):
 
     @staticmethod
     def add_argparse_args(parent_parser):
-        parent_parser.add_argument('--model', type=str, default='scGGN', choices=["scGGN"])
+        parent_parser.add_argument('--model', type=str, default='autoCell', choices=["autoCell"])
         parent_parser.add_argument("--log_dir", type=str, default="runs")
         parent_parser.add_argument("--batch_size", type=int, default=128)
         parent_parser.add_argument("--num_workers", type=int, default=0)
@@ -362,7 +362,7 @@ class ModelEvaluator(EvalProtocol):
         parent_parser.set_defaults(hidden_dims=(128, 128))
         parent_parser = EvalProtocol.add_argparse_args(parent_parser)
         parent_parser = pl.Trainer.add_argparse_args(parent_parser)
-        parent_parser = scGGN.add_model_specific_args(parent_parser)
+        parent_parser = autoCell.add_model_specific_args(parent_parser)
         return parent_parser
 
 
